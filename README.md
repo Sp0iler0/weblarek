@@ -260,3 +260,5 @@ interface IBuyer {
 **Методы:**
 - `getProducts(): Promise<IProduct[]>` — выполняет `GET /product/` и возвращает массив товаров.
 - `createOrder(order: IOrderRequest): Promise<IOrderResponse>` — выполняет `POST /order/` и отправляет данные заказа.
+
+...
