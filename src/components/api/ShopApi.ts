@@ -1,17 +1,29 @@
-import type { IApi, IOrderRequest, IOrderResponse, IProduct, IProductsResponse } from '../../types';
+import type {
+  IApi,
+  IOrderRequest,
+  IOrderResponse,
+  IProduct,
+  IProductsResponse,
+} from '../../types';
 
 export class ShopApi {
-  private api: IApi;
+  constructor(private api: IApi) {}
 
-  constructor(api: IApi) {
-    this.api = api;
-  }
-
+  /**
+   * Получает список товаров с сервера
+   * GET /product
+   */
   public getProducts(): Promise<IProduct[]> {
-    return this.api.get<IProductsResponse>('/api/weblarek/product').then((r) => r.items);
+    return this.api
+      .get<IProductsResponse>('/product')
+      .then((response) => response.items);
   }
 
+  /**
+   * Отправляет заказ на сервер
+   * POST /order
+   */
   public createOrder(order: IOrderRequest): Promise<IOrderResponse> {
-    return this.api.post<IOrderResponse>('/api/weblarek/order', order);
+    return this.api.post<IOrderResponse>('/order', order);
   }
 }

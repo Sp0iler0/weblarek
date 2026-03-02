@@ -25,18 +25,18 @@ export interface IBuyer {
 
 /**
  * Ответ сервера при запросе каталога
- * Сервер возвращает объект с массивом товаров
  */
 export interface IProductsResponse {
+  total: number;
   items: IProduct[];
 }
 
 /**
  * Данные, отправляемые на сервер при создании заказа
- * Используем уже существующий IBuyer и добавляем список id товаров
  */
 export interface IOrderRequest extends IBuyer {
   items: string[];
+  total: number;
 }
 
 /**

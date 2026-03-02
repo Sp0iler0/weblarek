@@ -1,16 +1,14 @@
 import type { IBuyer, TPayment } from '../../types';
 
+export type TBuyerErrors = Partial<Record<keyof IBuyer, string>>;
+
 export class Buyer {
   private payment: TPayment | null = null;
   private address = '';
   private phone = '';
   private email = '';
 
-  constructor(initialData?: Partial<IBuyer>) {
-    if (initialData) {
-      this.setData(initialData);
-    }
-  }
+  constructor() {}
 
   /**
    * Сохраняет данные покупателя. Поддерживает частичное обновление:
@@ -48,8 +46,8 @@ export class Buyer {
    * Возвращает объект ошибок: ключи — поля, значения — текст ошибки.
    * Если ошибок нет — возвращается пустой объект.
    */
-  public validate(): Partial<Record<keyof IBuyer, string>> {
-    const errors: Partial<Record<keyof IBuyer, string>> = {};
+  public validate(): TBuyerErrors {
+    const errors: TBuyerErrors = {};
 
     if (!this.payment) errors.payment = 'Не выбран вид оплаты';
     if (!this.email.trim()) errors.email = 'Укажите email';
